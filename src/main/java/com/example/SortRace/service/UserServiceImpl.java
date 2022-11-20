@@ -2,8 +2,10 @@ package com.example.SortRace.service;
 
 import com.example.SortRace.helper.mapper.user.RegisterUserDto;
 import com.example.SortRace.helper.mapper.user.UserMapper;
+import com.example.SortRace.helper.mapper.user.UserResponseDto;
 import com.example.SortRace.model.UserEntity;
 import com.example.SortRace.repository.UserRepository;
+import com.example.SortRace.util.Utility;
 import lombok.AllArgsConstructor;
 import org.hibernate.service.spi.ServiceException;
 import org.springframework.stereotype.Service;
@@ -13,6 +15,7 @@ import org.springframework.stereotype.Service;
 public class UserServiceImpl implements UserService{
 
     private final UserRepository userRepository;
+    private final Utility utility;
     @Override
     public Boolean register(RegisterUserDto registerUserDto) {
         UserEntity userEntity;
@@ -29,4 +32,11 @@ public class UserServiceImpl implements UserService{
 
         return true;
     }
+
+    @Override
+    public UserResponseDto getCurrentUserDto() {
+        return UserMapper.toUserResponseDto(utility.getCurrentUser());
+    }
+
+
 }

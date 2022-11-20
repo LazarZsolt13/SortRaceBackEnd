@@ -63,5 +63,17 @@ public class UserMapper{
 
         return userEntity;
     }
+    public static UserResponseDto toUserResponseDto(UserEntity userEntity){
+        UserResponseDto userResponseDto = new UserResponseDto();
 
+        userResponseDto.setId(userEntity.getId());
+        userResponseDto.setFirstName(userEntity.getFirstName());
+        userResponseDto.setLastName(userEntity.getLastName());
+        userResponseDto.setEmail(userEntity.getEmail());
+        userResponseDto.setNickName(userEntity.getNickName());
+        userResponseDto.setImage(userEntity.getImage());
+
+        return userResponseDto;
+
+    }
 }
