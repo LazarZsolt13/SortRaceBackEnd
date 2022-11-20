@@ -1,33 +1,13 @@
-package com.example.SortRace.model;
-import javax.persistence.*;
+package com.example.SortRace.helper.mapper.user;
 
-@Entity
-@Table(name = "users")
-public class UserEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+public class UserDto {
     Long id;
-
-    @Column(name = "first_name")
     String firstName;
-
-    @Column(name = "last_name")
     String lastName;
-
-    @Column(name = "nick_name")
     String nickName;
-
-    @Column(name = "image")
     String image;
-
-    @Column(name = "email")
     String email;
-
-    @Column(name = "password")
     String password;
-
-    @Column(name = "active")
     Boolean active;
 
     public Long getId() {
