@@ -4,10 +4,7 @@ import com.example.SortRace.service.GameService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @CrossOrigin
@@ -15,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/game")
 public class GameController {
     private final GameService gameService;
+    private PlayController theController;
 
     @GetMapping("/healthCheck")
     public ResponseEntity<?> healtCheck() { return ResponseEntity.ok().build(); }
@@ -27,4 +25,14 @@ public class GameController {
             return ResponseEntity.badRequest().body("hiba");
         }
     }
+
+    @PostMapping("/searchforgame")
+    public ResponseEntity<?> searchforgame(@RequestBody Long id){
+        try{
+            return ResponseEntity.ok().body(theController.newPlayerAdd(id));
+        }catch (Exception e){
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
 }
