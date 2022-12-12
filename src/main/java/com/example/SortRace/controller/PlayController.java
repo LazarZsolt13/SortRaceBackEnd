@@ -4,16 +4,16 @@ import java.util.ArrayList;
 
 public final class PlayController {
     private static PlayController playController;
-    private PlayController() {}
+    private PlayController() {
+        if (playController==null) {
+            playController = new PlayController();
+        }
+    }
 
     private ArrayList<RoomController> rooms = new ArrayList<>();
 
     public static PlayController getInstance(){
-        if (playController==null) {
-            playController = new PlayController();
-        }
         return playController;
-
     }
 
     public void newRoom (){

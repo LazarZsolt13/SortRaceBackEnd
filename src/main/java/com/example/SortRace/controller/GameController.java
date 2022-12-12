@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/game")
 public class GameController {
     private final GameService gameService;
-    private PlayController theController;
+    private final PlayController theController = PlayController.getInstance();
 
     @GetMapping("/healthCheck")
     public ResponseEntity<?> healtCheck() { return ResponseEntity.ok().build(); }
