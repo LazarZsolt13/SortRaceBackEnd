@@ -40,10 +40,9 @@ public class UserAuthenticationProvider implements AuthenticationProvider {
             throw new BadCredentialsException("Account has not been activated! Check confirmation email.");
 
         List<GrantedAuthority> authorities = new ArrayList<>();
-        //authorities.add(new SimpleGrantedAuthority(user.get().getRole()));
+        authorities.add(new SimpleGrantedAuthority(user.get().getRole()));
 
-
-        return new UsernamePasswordAuthenticationToken(user.get().getId(), null);
+        return new UsernamePasswordAuthenticationToken(user.get().getId(), null, authorities);
     }
 
     @Override

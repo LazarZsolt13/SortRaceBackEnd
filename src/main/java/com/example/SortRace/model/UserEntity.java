@@ -93,4 +93,9 @@ public class UserEntity {
     public void setActive(Boolean active) {
         this.active = active;
     }
+
+    public String getRole(){
+        return "admin";
+    }
+
 }

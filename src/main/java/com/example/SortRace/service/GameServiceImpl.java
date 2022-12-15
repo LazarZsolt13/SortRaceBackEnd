@@ -1,6 +1,7 @@
 package com.example.SortRace.service;
 
 import com.example.SortRace.controller.PlayController;
+import com.example.SortRace.helper.mapper.game.SearchGameDto;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -8,12 +9,11 @@ import org.springframework.stereotype.Service;
 @AllArgsConstructor
 public class GameServiceImpl implements GameService {
 
-    private final PlayController theController = PlayController.getInstance();
     public int create(){
         return 1;
     }
 
-    public int searchgame(Long id,int roomsize){
-        return theController.newPlayerManager(id,roomsize);
+    public int searchgame(SearchGameDto searchGameDto){
+        return PlayController.getInstance().newPlayerManager(searchGameDto.getId(), searchGameDto.getRoomsize());
     }
 }

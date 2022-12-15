@@ -1,6 +1,5 @@
 package com.example.SortRace.config;
 
-import com.example.SortRace.config.TokenAuthenticationService;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.JwtException;
 import org.slf4j.Logger;
@@ -18,6 +17,7 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+
 
 @Component
 public class AuthenticationFilter extends GenericFilterBean {

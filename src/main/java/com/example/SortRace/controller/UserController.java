@@ -39,11 +39,16 @@ public class UserController {
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginUserDto loginUserDto, HttpServletResponse httpServletResponse){ // fogalmam sincs hogy mi ez.
         try{
-            UsernamePasswordAuthenticationToken usr = new UsernamePasswordAuthenticationToken(loginUserDto.getEmail(),loginUserDto.getPassword());
+            UsernamePasswordAuthenticationToken usr = new UsernamePasswordAuthenticationToken(loginUserDto.getEmail(),
+                    loginUserDto.getPassword());
+
             Authentication auth = userAuthenticationProvider.authenticate(usr);
-            tokenAuthenticationService.authenticationResponse(httpServletResponse,auth);
+            tokenAuthenticationService.authenticationResponse(httpServletResponse, auth);
+
             SecurityContextHolder.getContext().setAuthentication(auth);
+
             return ResponseEntity.ok().body(userService.getCurrentUserDto());
+
         }catch (ServiceException e){
             return ResponseEntity.badRequest().body(e.getMessage());
         }
