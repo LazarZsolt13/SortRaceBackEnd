@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/game")
 public class GameController {
     private final GameService gameService;
-    private final PlayController theController = PlayController.getInstance();
+
 
     @GetMapping("/healthCheck")
     public ResponseEntity<?> healtCheck() { return ResponseEntity.ok().build(); }
@@ -27,9 +27,9 @@ public class GameController {
     }
 
     @PostMapping("/searchforgame")
-    public ResponseEntity<?> searchforgame(@RequestBody Long id){
+    public ResponseEntity<?> searchforgame(@RequestBody Long id, int roomspace){
         try{
-            return ResponseEntity.ok().body(theController.newPlayerAdd(id));
+            return ResponseEntity.ok().body(gameService.searchgame(id,roomspace));
         }catch (Exception e){
             return ResponseEntity.badRequest().body(e.getMessage());
         }

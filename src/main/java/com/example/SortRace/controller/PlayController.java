@@ -16,11 +16,23 @@ public final class PlayController {
         return playController;
     }
 
-    public void newRoom (){
-        RoomController room = new RoomController();
-        rooms.add(room);
+    
+    public int newPlayerManager(Long id, int roomspace){
+        for (RoomController room:rooms) {
+            if (room.isInThisRoom(id)){
+                return room.getThisRoomId();
+            }
+        }
+        for (RoomController room:rooms) {
+            if ((room.getThisRoomSpace() == roomspace) && (room.getFreeSpace()>0)){
+                return room.newPlayer(id);
+            }
+        }
+        RoomController temp = new RoomController(roomspace);
+        temp.newPlayer(id);
+        rooms.add(temp);
+        return temp.getThisRoomId();
     }
-
     public void deleteRoom(int i){
         rooms.remove(i);
     }

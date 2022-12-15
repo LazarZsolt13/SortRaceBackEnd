@@ -17,6 +17,9 @@ public class PlayerCurrentStage {
         return numbers.get(i)-numbers.get(j);
     }
 
+    public Long getId(){
+        return this.id;
+    }
     public void Swap(int i,int j){
         int temp = numbers.get(i);
         numbers.set(i,numbers.get(j));
