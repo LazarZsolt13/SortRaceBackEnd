@@ -13,7 +13,7 @@ public class GameServiceImpl implements GameService {
         return 1;
     }
 
-    public int searchgame(SearchGameDto searchGameDto){
-        return PlayController.getInstance().newPlayerManager(searchGameDto.getId(), searchGameDto.getRoomsize());
+    public int searchgame(Long id, SearchGameDto searchGameDto){
+        return PlayController.getInstance().newPlayerManager(id, searchGameDto.getRoomsize());
     }
 }

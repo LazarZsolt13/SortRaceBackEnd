@@ -2,6 +2,7 @@ package com.example.SortRace.controller;
 
 import com.example.SortRace.helper.mapper.game.SearchGameDto;
 import com.example.SortRace.service.GameService;
+import com.example.SortRace.util.Utility;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/game")
 public class GameController {
     private final GameService gameService;
+    private final Utility utility;
 
     @GetMapping("/healthCheck1")
     public ResponseEntity<?> healtCheck1() { return ResponseEntity.ok().build(); }
@@ -29,7 +31,7 @@ public class GameController {
     @PostMapping("/searchforgame")
     public ResponseEntity<?> searchforgame(@RequestBody SearchGameDto searchGameDto){
         try{
-            return ResponseEntity.ok().body(gameService.searchgame(searchGameDto));
+            return ResponseEntity.ok().body(gameService.searchgame(utility.getCurrentUser().getId(), searchGameDto));
         }catch (Exception e){
             return ResponseEntity.badRequest().body(e.getMessage());
         }
