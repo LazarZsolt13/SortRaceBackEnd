@@ -16,4 +16,8 @@ public class GameServiceImpl implements GameService {
     public int searchgame(Long id, SearchGameDto searchGameDto){
         return PlayController.getInstance().newPlayerManager(id, searchGameDto.getRoomsize());
     }
+
+    public boolean waitforplayers(int id){
+        return PlayController.getInstance().roomIsFull(id);
+    }
 }

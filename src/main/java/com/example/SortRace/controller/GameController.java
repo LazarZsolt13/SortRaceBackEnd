@@ -37,4 +37,13 @@ public class GameController {
         }
     }
 
+    @GetMapping("/waitforplayers/{id}")
+    public ResponseEntity<?> waitforplayers(@PathVariable("id") int id){
+        try{
+            return ResponseEntity.ok().body(gameService.waitforplayers(id));
+        }catch (Exception e){
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
 }

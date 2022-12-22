@@ -6,4 +6,5 @@ public interface GameService {
     int create();
     /** this is a create method**/
     int searchgame(Long id,SearchGameDto searchGameDto);
+    boolean waitforplayers(int id);
 }
