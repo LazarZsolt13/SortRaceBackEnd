@@ -47,6 +47,16 @@ public class RoomController {
     public int getFreeSpace(){
         return this.space- players.size();
     }
+
+    public PlayerCurrentStage getCurrentPlayer(Long ID){
+        for (PlayerCurrentStage player: players )
+        {
+            if(player.getId() == ID){
+                return player;
+            }
+        }
+        return null;
+    }
     //public boolean
 }
 

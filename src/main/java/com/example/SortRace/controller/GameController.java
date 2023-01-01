@@ -1,5 +1,6 @@
 package com.example.SortRace.controller;
 
+import com.example.SortRace.helper.mapper.game.CompareRequestDTO;
 import com.example.SortRace.helper.mapper.game.SearchGameDto;
 import com.example.SortRace.service.GameService;
 import com.example.SortRace.util.Utility;
@@ -41,6 +42,14 @@ public class GameController {
     public ResponseEntity<?> waitforplayers(@PathVariable("id") int id){
         try{
             return ResponseEntity.ok().body(gameService.waitforplayers(id));
+        }catch (Exception e){
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+    @PostMapping("/compareByIndex")
+    public ResponseEntity<?> compareByIndex(@RequestBody CompareRequestDTO compareRequestDTO){
+        try{
+            return ResponseEntity.ok().body(gameService.compareByIndex(utility.getCurrentUser().getId(), compareRequestDTO));
         }catch (Exception e){
             return ResponseEntity.badRequest().body(e.getMessage());
         }

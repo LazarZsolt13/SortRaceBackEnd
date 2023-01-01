@@ -1,5 +1,7 @@
 package com.example.SortRace.controller;
 
+import com.example.SortRace.helper.mapper.game.CompareRequestDTO;
+
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
@@ -58,6 +60,14 @@ public final class PlayController {
 
     public boolean newPlayerAdd(Long id){
         return true;
+    }
+    public int compareByindex(Long id, CompareRequestDTO compareRequestDTO){
+        for (RoomController room:rooms) {
+            if (room.isInThisRoom(id)){
+                return room.getCurrentPlayer(id).CompareByIndex(compareRequestDTO);
+            }
+        }
+        return 0;
     }
 
 

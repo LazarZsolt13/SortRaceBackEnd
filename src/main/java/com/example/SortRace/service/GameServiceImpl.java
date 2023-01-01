@@ -1,6 +1,7 @@
 package com.example.SortRace.service;
 
 import com.example.SortRace.controller.PlayController;
+import com.example.SortRace.helper.mapper.game.CompareRequestDTO;
 import com.example.SortRace.helper.mapper.game.SearchGameDto;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -19,5 +20,8 @@ public class GameServiceImpl implements GameService {
 
     public boolean waitforplayers(int id){
         return PlayController.getInstance().roomIsFull(id);
+    }
+    public int compareByIndex(Long id, CompareRequestDTO compareRequestDTO){
+        return PlayController.getInstance().compareByindex(id,compareRequestDTO);
     }
 }
