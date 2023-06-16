@@ -1,41 +1,28 @@
-package com.example.SortRace.controller;
+package com.example.SortRace.controller.GameModes;
 
+import com.example.SortRace.controller.BaseGameController;
 import com.example.SortRace.model.PlayerCurrentStage;
 
 import java.util.ArrayList;
 import java.util.Random;
 
-public class RoomController {
+public class RoomController extends BaseGameController {
     private int space;
-    public static int roomId = 0 ;
-    private ArrayList<Integer> randomNumbers = new ArrayList<Integer>();
     private ArrayList<PlayerCurrentStage> players = new ArrayList<PlayerCurrentStage>();
-    private int thisRoomId;
     public RoomController(int space){
+        super();
         this.space=space;
-        Random rand= new Random();
-        thisRoomId = roomId;
-        roomId++;
-        for (int i=0;i<10;i++){
-            randomNumbers.add(rand.nextInt(100));
-        }
+
     }
 
-    public ArrayList<Integer> getRandomNumbers() {
-        return randomNumbers;
-    }
-
-    public int getThisRoomId() {
-        return thisRoomId;
-    }
     public int getThisRoomSpace(){return this.space;}
 
     public int newPlayer(Long id){
-        PlayerCurrentStage player = new PlayerCurrentStage(id,this.randomNumbers);
+        PlayerCurrentStage player = new PlayerCurrentStage(id,this.getRandomNumbers());
         players.add(player);
-        return this.thisRoomId;
+        return this.getThisGameId();
     }
-
+    @Override
     public boolean isInThisRoom(Long id){
         for (PlayerCurrentStage player:this.players) {
             if(id==player.getId()){
@@ -47,7 +34,7 @@ public class RoomController {
     public int getFreeSpace(){
         return this.space- players.size();
     }
-
+    @Override
     public PlayerCurrentStage getCurrentPlayer(Long ID){
         for (PlayerCurrentStage player: players )
         {

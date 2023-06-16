@@ -1,16 +1,18 @@
 package com.example.SortRace.controller;
 
+import com.example.SortRace.controller.GameModes.RoomController;
+import com.example.SortRace.controller.Methods.BubleSortController;
 import com.example.SortRace.helper.mapper.game.CompareRequestDTO;
+import com.example.SortRace.helper.mapper.game.SwapRequestDTO;
 
 import java.util.ArrayList;
-import java.util.concurrent.TimeUnit;
 
 public final class PlayController {
     private static PlayController playController;
     private PlayController() {
     }
 
-    private ArrayList<RoomController> rooms = new ArrayList<>();
+    private ArrayList<BaseGameController> games = new ArrayList<>();
 
     public static PlayController getInstance(){
         if (playController==null) {
@@ -22,10 +24,13 @@ public final class PlayController {
     public boolean roomIsFull(int id){
         int increment =0 ;
         while (increment<200){
-            for (RoomController room:this.rooms) {
-                if(room.getThisRoomId()==id && room.getFreeSpace()==0){
-                    return true;
+            for (BaseGameController game:this.games) {
+                if(game instanceof RoomController){
+                    if(game.getThisGameId()==id && ((RoomController) game).getFreeSpace()==0){
+                        return true;
+                    }
                 }
+
             }
             increment++;
             try{
@@ -39,38 +44,60 @@ public final class PlayController {
     }
     
     public int newPlayerManager(Long id, int roomspace){
-        for (RoomController room:rooms) {
-            if (room.isInThisRoom(id)){
-                return room.getThisRoomId();
-            }
+        for (BaseGameController game:games) {
+                if (game.isInThisRoom(id)) {
+                    return game.getThisGameId();
+                }
         }
-        for (RoomController room:rooms) {
-            if ((room.getThisRoomSpace() == roomspace) && (room.getFreeSpace()>0)){
-                return room.newPlayer(id);
+
+        for (BaseGameController game:games) {
+            if(game instanceof RoomController) {
+                if ((((RoomController) game).getThisRoomSpace() == roomspace) && (((RoomController) game).getFreeSpace() > 0)) {
+                    return ((RoomController) game).newPlayer(id);
+                }
             }
         }
         RoomController temp = new RoomController(roomspace);
         temp.newPlayer(id);
-        rooms.add(temp);
-        return temp.getThisRoomId();
+        games.add(temp);
+        return temp.getThisGameId();
     }
-    public void deleteRoom(int i){
-        rooms.remove(i);
+    public void deleteGame(int i){
+        games.remove(i);
     }
 
     public boolean newPlayerAdd(Long id){
         return true;
     }
     public int compareByindex(Long id, CompareRequestDTO compareRequestDTO){
-        for (RoomController room:rooms) {
-            if (room.isInThisRoom(id)){
-                return room.getCurrentPlayer(id).CompareByIndex(compareRequestDTO);
-            }
+        for (BaseGameController game:games) {
+                if (game.isInThisRoom(id)) {
+                    return game.getCurrentPlayer(id).CompareByIndex(compareRequestDTO);
+                }
         }
         return 0;
     }
+    public long swapByIndex(Long id, SwapRequestDTO swapRequestDTO){
+        for (BaseGameController game:games) {
+            if (game.isInThisRoom(id)) {
+                return game.getCurrentPlayer(id).SwapByIndex(swapRequestDTO);
+            }
+        }
+        return -1;
+    }
+    public int newBubleMethod(Long id){
+        for (BaseGameController game:games) {
+            if (game.isInThisRoom(id)) {
+                return game.getThisGameId();
+            }
+        }
 
+        BubleSortController temp = new BubleSortController();
+        temp.newPlayer(id);
+        games.add(temp);
+        return temp.getThisGameId();
 
+    }
 
 
 }

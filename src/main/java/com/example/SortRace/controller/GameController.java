@@ -2,6 +2,7 @@ package com.example.SortRace.controller;
 
 import com.example.SortRace.helper.mapper.game.CompareRequestDTO;
 import com.example.SortRace.helper.mapper.game.SearchGameDto;
+import com.example.SortRace.helper.mapper.game.SwapRequestDTO;
 import com.example.SortRace.service.GameService;
 import com.example.SortRace.util.Utility;
 import lombok.AllArgsConstructor;
@@ -46,8 +47,33 @@ public class GameController {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
+
+    @PostMapping("/startBubleMethod/")
+    public ResponseEntity<?> startBubleMethod(){
+        try{
+            return ResponseEntity.ok().body(gameService.searchBubleMethod(utility.getCurrentUser().getId()));
+        }catch (Exception e){
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
     @PostMapping("/compareByIndex")
     public ResponseEntity<?> compareByIndex(@RequestBody CompareRequestDTO compareRequestDTO){
+        try{
+            return ResponseEntity.ok().body(gameService.compareByIndex(utility.getCurrentUser().getId(), compareRequestDTO));
+        }catch (Exception e){
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+    @PostMapping("/swapByIndex")
+    public ResponseEntity<?> compareByIndex(@RequestBody SwapRequestDTO swapRequestDTO){
+        try{
+            return ResponseEntity.ok().body(gameService.swapByIndex(utility.getCurrentUser().getId(), swapRequestDTO));
+        }catch (Exception e){
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+    @PostMapping("/nextStep")
+    public ResponseEntity<?> nextStep(@RequestBody CompareRequestDTO compareRequestDTO){
         try{
             return ResponseEntity.ok().body(gameService.compareByIndex(utility.getCurrentUser().getId(), compareRequestDTO));
         }catch (Exception e){
