@@ -62,6 +62,16 @@ public final class PlayController {
         games.add(temp);
         return temp.getThisGameId();
     }
+    public int removePlayerManager(Long id){
+        int removedPN =0;
+        for (BaseGameController game:games) {
+            if (game.isInThisRoom(id)) {
+                game.removePlayer(id);
+                removedPN++;
+            }
+        }
+        return removedPN;
+    }
     public void deleteGame(int i){
         games.remove(i);
     }

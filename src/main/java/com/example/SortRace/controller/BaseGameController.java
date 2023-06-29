@@ -3,6 +3,7 @@ package com.example.SortRace.controller;
 import com.example.SortRace.model.PlayerCurrentStage;
 
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Random;
 
 public class BaseGameController {
@@ -28,6 +29,9 @@ public class BaseGameController {
 
     public boolean isInThisRoom(Long id){
         return false;
+    }
+    public void removePlayer(Long id){
+
     }
     public PlayerCurrentStage getCurrentPlayer(Long ID){
         return null;

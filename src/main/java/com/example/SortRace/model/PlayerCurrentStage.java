@@ -11,12 +11,12 @@ import java.util.Date;
 public class PlayerCurrentStage {
     private Long id;
     private ArrayList<Integer> numbers = new ArrayList<Integer>();
-    private Instant instant = Instant.now();
+    private long start;
 
     public PlayerCurrentStage(Long id, ArrayList<Integer> randnumbers){
         this.id=id;
         this.numbers.addAll(randnumbers);
-
+        this.start = System.currentTimeMillis();
     }
 
     public int CompareByIndex (CompareRequestDTO compareRequestDTO){ // Ha negativ szamot dob akkor a masodik parameteren levo index a nyagyobb
@@ -53,7 +53,8 @@ public class PlayerCurrentStage {
         numbers.set(swapRequestDTO.geti(),numbers.get(swapRequestDTO.getj()));
         numbers.set(swapRequestDTO.getj(),temp);
         if (done()){
-            return instant.getEpochSecond();
+            return System.currentTimeMillis()-this.start;
+
         }
         return 1;
     }

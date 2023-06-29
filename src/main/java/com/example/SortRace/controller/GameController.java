@@ -39,6 +39,15 @@ public class GameController {
         }
     }
 
+    @GetMapping("/removeplayer")
+    public ResponseEntity<?> removeplayer(){
+        try{
+            return ResponseEntity.ok().body(gameService.removeplayer(utility.getCurrentUser().getId()));
+        }catch (Exception e){
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
     @GetMapping("/waitforplayers/{id}")
     public ResponseEntity<?> waitforplayers(@PathVariable("id") int id){
         try{

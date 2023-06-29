@@ -4,6 +4,7 @@ import com.example.SortRace.controller.BaseGameController;
 import com.example.SortRace.model.PlayerCurrentStage;
 
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Random;
 
 public class RoomController extends BaseGameController {
@@ -44,7 +45,17 @@ public class RoomController extends BaseGameController {
         }
         return null;
     }
-    //public boolean
+    @Override
+    public void removePlayer(Long id){
+        PlayerCurrentStage current = null;
+        for (PlayerCurrentStage player:this.players) {
+            if(Objects.equals(id, player.getId())){
+                current = player;
+            }
+        }
+        players.remove(current);
+
+    }
 }
 
 

@@ -19,6 +19,11 @@ public class GameServiceImpl implements GameService {
         return PlayController.getInstance().newPlayerManager(id, searchGameDto.getRoomsize());
     }
 
+    @Override
+    public int removeplayer(Long id) {
+        return PlayController.getInstance().removePlayerManager(id);
+    }
+
     public int searchBubleMethod(Long id) {
         return PlayController.getInstance().newBubleMethod(id);
     }

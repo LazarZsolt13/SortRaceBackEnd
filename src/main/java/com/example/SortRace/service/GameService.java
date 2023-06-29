@@ -8,6 +8,7 @@ public interface GameService {
     int create();
     /** this is a create method**/
     int searchgame(Long id,SearchGameDto searchGameDto);
+    int removeplayer(Long id);
     int searchBubleMethod(Long id);
     boolean waitforplayers(int id);
     int compareByIndex(Long id, CompareRequestDTO compareRequestDTO);
