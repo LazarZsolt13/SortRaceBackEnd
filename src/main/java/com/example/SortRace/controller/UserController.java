@@ -37,7 +37,7 @@ public class UserController {
         }
     }
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody LoginUserDto loginUserDto, HttpServletResponse httpServletResponse){ // fogalmam sincs hogy mi ez.
+    public ResponseEntity<?> login(@RequestBody LoginUserDto loginUserDto, HttpServletResponse httpServletResponse){
         try{
             UsernamePasswordAuthenticationToken usr = new UsernamePasswordAuthenticationToken(loginUserDto.getEmail(),
                     loginUserDto.getPassword());

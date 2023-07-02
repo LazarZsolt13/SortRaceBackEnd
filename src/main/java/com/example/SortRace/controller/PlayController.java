@@ -11,7 +11,6 @@ public final class PlayController {
     private static PlayController playController;
     private PlayController() {
     }
-
     private ArrayList<BaseGameController> games = new ArrayList<>();
 
     public static PlayController getInstance(){
@@ -20,7 +19,6 @@ public final class PlayController {
         }
         return playController;
     }
-
     public boolean roomIsFull(int id){
         int increment =0 ;
         while (increment<200){
@@ -42,7 +40,6 @@ public final class PlayController {
         }
         return false;
     }
-    
     public int newPlayerManager(Long id, int roomspace){
         for (BaseGameController game:games) {
                 if (game.isInThisRoom(id)) {
@@ -75,7 +72,6 @@ public final class PlayController {
     public void deleteGame(int i){
         games.remove(i);
     }
-
     public boolean newPlayerAdd(Long id){
         return true;
     }
